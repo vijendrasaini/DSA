@@ -1,6 +1,6 @@
 package graph;
 import java.util.*;
-public class Solution {
+class Solution {
     public ArrayList<ArrayList<Integer>> getComponents(int V, int[][] edges) {
         // code here
         List<List<Integer>> adj = getAdj(V, edges);
@@ -12,13 +12,15 @@ public class Solution {
             if(!vis[i]) {
                 ArrayList<Integer> group = new ArrayList<>();
                 q.offer(i);
+                vis[i] = true;
                 while(!q.isEmpty()) {
                     int node = q.poll();
-                    
-                    if(!vis[node]) group.add(node);
-                    vis[node] = true;
+                    group.add(node);
                     for(int nei : adj.get(node)) {
-                        if(!vis[nei]) q.offer(nei);
+                        if(!vis[nei]) {
+                            vis[nei] = true;
+                            q.offer(nei);
+                        }
                     }
                     
                 }
