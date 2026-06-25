@@ -33,11 +33,11 @@ class Solution {
     }
     
     
-    void dfs(int i, List<List<Integer>> adj, ArrayList<Integer> ans, boolean[] vis) {
-        vis[i] = true;
-        ans.add(i);
+    void dfs(int node, List<List<Integer>> adj, ArrayList<Integer> ans, boolean[] vis) {
+        vis[node] = true;
+        ans.add(node);
         
-        for(int nei : adj.get(i)) {
+        for(int nei : adj.get(node)) {
             if(!vis[nei]) dfs(nei, adj, ans, vis);
         }
     }
