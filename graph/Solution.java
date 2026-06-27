@@ -8,6 +8,9 @@ class Solution {
         
         boolean[] vis = new boolean[V];
         Queue<Integer> q = new ArrayDeque<>();
+        Deque<Integer> d = new ArrayDeque<>();
+        Stack<Integer> s = (Stack<Integer>) d;
+        Collections.sort((Stack<Integer>) d);
         for(int i = 0; i < V; i++) {
             if(!vis[i]) {
                 ArrayList<Integer> group = new ArrayList<>();
