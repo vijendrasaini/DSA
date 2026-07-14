@@ -13,4 +13,14 @@ public class Knapsack {
 
         return dp[index] = Math.max(taken, notTaken);
     }
+
+    int knapsack(int index, int total, int[] nums) {
+        if (index < 0)
+            return total;
+
+        int taken = nums[index] + knapsack(index - 2, total, nums);
+        int notTaken = knapsack(index - 1, total, nums);
+
+        return Math.max(taken, notTaken);
+    }
 }
