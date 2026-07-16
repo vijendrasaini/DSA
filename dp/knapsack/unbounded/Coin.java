@@ -1,3 +1,7 @@
+package dp.knapsack.unbounded;
+
+import java.util.Arrays;
+
 class Coin {
     int INF = 100_000;
     public int coinChange(int[] coins, int amount) {
