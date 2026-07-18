@@ -5,14 +5,33 @@ public class LCSLength {
         int n1 = text1.length(), n2 = text2.length();
         int[][] dp = new int[n1 + 1][n2 + 1];
 
-        for(int i = 1; i <= n1; i++) {
-            for(int j = 1; j <= n2; j++) {
-                if(text1.charAt(i - 1) == text2.charAt(j - 1)) dp[i][j] = 1 + dp[i - 1][j - 1];
-                else dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+        for (int i = 1; i <= n1; i++) {
+            for (int j = 1; j <= n2; j++) {
+                if (text1.charAt(i - 1) == text2.charAt(j - 1))
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                else
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
             }
         }
 
         printLCS(text1, text2, dp);
         return dp[n1][n2];
+    }
+
+    void printLCS(String s1, String s2, int[][] dp) {
+        int i = dp.length - 1, j = dp[0].length - 1;
+        StringBuilder st = new StringBuilder();
+        while (i > 0 && j > 0) {
+            if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                st.append(s1.charAt(i - 1));
+                i--;
+                j--;
+            } else if (dp[i - 1][j] > dp[i][j - 1])
+                i--;
+            else
+                j--;
+        }
+
+        System.out.println(st.reverse().toString());
     }
 }
