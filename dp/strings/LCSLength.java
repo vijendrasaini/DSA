@@ -14,7 +14,6 @@ public class LCSLength {
             }
         }
 
-        printLCS(text1, text2, dp);
         return dp[n1][n2];
     }
 
