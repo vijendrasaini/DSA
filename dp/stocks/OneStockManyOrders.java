@@ -3,7 +3,7 @@ package dp.stocks;
 import java.util.Arrays;
 
 public class OneStockManyOrders {
-    public int maxProfit2(int[] prices) {
+    public int maxProfit(int[] prices) {
         int n = prices.length;
 
         int prevBuy = 0, prevSell = 0, currBuy = 0, currSell = 0;
@@ -18,7 +18,26 @@ public class OneStockManyOrders {
         return prevBuy;
     }
 
-    public int maxProfit(int[] prices) {
+    public int maxProfitByLookUpTable(int[] prices) {
+        int n = prices.length;
+        int[] prev = new int[2], curr = prev;
+        for(int i = n - 1; i >= 0; i--) {
+            curr = new int[2];
+            for(int j = 0; j < 2; j++) {
+                if(j == 1) {
+                    curr[j] = Math.max(- prices[i] + prev[0], prev[1]);
+                } else {
+                    curr[j] = Math.max(  prices[i] + prev[1], prev[0]);
+                }
+            }
+
+            prev = curr;
+        }
+
+        return prev[1];
+    }
+
+    public int maxProfitByMemo(int[] prices) {
         int n = prices.length;
         int k = Arrays.stream(prices).max().orElse(0);
         int[][] dp = new int[n][2];
