@@ -1,0 +1,29 @@
+package dp.partition;
+
+import java.util.Arrays;
+
+public class MCM {
+
+    static int matrixMultiplicationMemo(int arr[]) {
+        int n = arr.length;
+        int[][] dp = new int[n][n];
+        for(int i = 0; i < n; i++) Arrays.fill(dp[i], -1);
+        return get(0, n - 1, arr, dp);
+    }
+    
+    
+    static int get(int i, int j, int[] arr, int[][] dp) {
+        if(i == j || i + 1 == j) return dp[i][j] = 0;
+        
+        if(dp[i][j] != -1) return dp[i][j];
+        int min = Integer.MAX_VALUE;
+        for(int k = i + 1; k < j; k++) {
+            int leftPart = get(i, k, arr, dp);
+            int rightPart = get(k, j, arr, dp);
+            int opsAtPart = arr[i] * arr[k] * arr[j];
+            min = Math.min(min, leftPart + rightPart + opsAtPart);
+        }
+        
+        return dp[i][j] = min;
+    }
+}
