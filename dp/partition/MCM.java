@@ -3,6 +3,25 @@ package dp.partition;
 import java.util.Arrays;
 
 public class MCM {
+    static int matrixMultiplicationTabulation(int arr[]) {
+        int n = arr.length;
+        int[][] dp = new int[n][n];
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = i + 2; j < n; j++) {
+                int min = Integer.MAX_VALUE;
+                for(int k = i + 1; k < j; k++) {
+                    int leftPart = dp[i][k];
+                    int rightPart = dp[k][j];
+                    int opsAtPart = arr[i] * arr[k] * arr[j];
+                    min = Math.min(min, leftPart + rightPart + opsAtPart);
+                }
+                
+                dp[i][j] = min;
+            }
+        }
+        
+        return dp[0][n - 1];
+    }
 
     static int matrixMultiplicationMemo(int arr[]) {
         int n = arr.length;
